@@ -7,11 +7,9 @@ import { HORIZONTAL_AXIS, VERTICAL_AXIS, initialBoardState, PieceType, TeamType,
 //Chessbaord application
 export function Chessboard() {
     // function to grab pieces
-    // const[enPassant, setEnPassant] = useState(true);
     const [activePiece, setActivePiece] = useState(null)
     const [grabbedPosition, setGrabbedPosition] = useState({ x: -1, y: -1 })
-    // const [grabbedPosition.x, setgrabbedPosition.x] = useState(0);
-    // const [grabbedPosition.y, setgrabbedPosition.y] = useState(0);
+
     const [pieces, setPieces] = useState(initialBoardState);
     const chessboardRef = useRef(null);
     const refree = new Refree();
@@ -148,8 +146,11 @@ export function Chessboard() {
     }
 
     return (
+        <div>
+            <button>Reset</button>
         <div className="Chessboard" onMouseMove={e => movePiece(e)} onMouseDown={e => grabPieces(e)} onMouseUp={e => dropPiece(e)} id="chessboard" ref={chessboardRef}>
             {board}
+        </div>
         </div>
     );
 }
