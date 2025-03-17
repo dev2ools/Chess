@@ -1,0 +1,14 @@
+name: Push Notification
+
+on: 
+  push:
+    branches:
+      - main  # Replace with your branch name if needed
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Notification
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Test : Code pushed to main branch!"}' https://hooks.slack.com/services/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
