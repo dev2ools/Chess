@@ -3,12 +3,16 @@ name: Push Notification
 on: 
   push:
     branches:
-      - main  # Replace with your branch name if needed
+      - main  # Change if using a different branch
 
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Notification
+      - name: Send Notification to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Test : Code pushed to main branch!"}' https://hooks.slack.com/services/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
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"Test : 🚀 Code pushed to main branch!"}' \
+          $SLACK_WEBHOOK_URL
