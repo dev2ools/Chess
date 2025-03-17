@@ -1,18 +1,23 @@
-name: Push Notification
+name: Email Notification
 
-on: 
+on:
   push:
     branches:
-      - main  # Change if using a different branch
+      - main  # Change this if you want notifications for other branches
 
 jobs:
-  notify:
+  send_email:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Send Notification to Slack
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"Test : 🚀 Code pushed to main branch!"}' \
-          $SLACK_WEBHOOK_URL
+      - name: Send Email on Push
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "🚀 Code Pushed to Main Branch"
+          to: asiphendimlana40@gmail.com
+          from: "GitHub Notifications asiphendimlana40@gmail.com"
+          body: "Code has been pushed to the main branch. Check the repository for details."
